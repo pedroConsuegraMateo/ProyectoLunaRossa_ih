@@ -45,8 +45,15 @@ def phone_numbers(detalles):
     
     return phones_df
             
+def coordsExtractor(urls):
+    x = [re.search('!3d\d\d.?\d{0,8}', i).group()[3:] for i in urls]
+    y = [re.search('!4d-?\d\d?\.\d{0,8}', i).group()[3:] for i in urls]
+    return x, y
 
 def create_restaurantes_df(nombres, rates, nums_resenas, pricings, labels, descripciones, direcciones, urls, phone_numbers_df):
+    
+    x, y = coordsExtractor(urls)
+    
     data = {
         'nombre': nombres,
         'rate': rates,
@@ -55,13 +62,16 @@ def create_restaurantes_df(nombres, rates, nums_resenas, pricings, labels, descr
         'labels': labels,
         'descripcion': descripciones,
         'direccion':direcciones,
-        'url': urls
+        'url': urls,
+        'x': x,
+        'y': y
     }
     restaurantes_df = pd.DataFrame(data)
     restaurantes_df = pd.merge(restaurantes_df,phone_numbers_df,on='direccion', how='left')
     restaurantes_df = restaurantes_df.fillna('-')
     
     restaurantes_df = restaurantes_df.drop_duplicates()
+    print(restaurantes_df)
 
     return restaurantes_df
 
