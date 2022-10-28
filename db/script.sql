@@ -14,7 +14,9 @@ CREATE TABLE restaurantes (
     descripcion varchar(1000),
     direccion varchar(1000) NOT NULL,
     url varchar(1000),
-    numero varchar(16)
+    numero varchar(16),
+	x varchar(16),
+	y varchar(16)
 );
 
 CREATE TABLE credenciales_usuarios (
