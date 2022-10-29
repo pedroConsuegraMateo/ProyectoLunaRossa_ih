@@ -32,7 +32,7 @@ if __name__ == '__main__':
     
     random_sleep()
     
-    nombres, rates, nums_resenas, detalles, pricings, labels, descripciones, urls = rn.cards_travel(driver, cards)
+    nombres, rates, nums_resenas, detalles, pricings, labels, descripciones, urls, img = rn.cards_travel(driver, cards)
     
     random_sleep()
     
@@ -43,7 +43,7 @@ if __name__ == '__main__':
     direcciones = rcd.get_direcciones(detalles)
     phone_numbers = rcd.phone_numbers(detalles)
     
-    restaurantes = rcd.create_restaurantes_df(nombres, rates, resenas, pricings, labels, descripciones, direcciones, urls, phone_numbers)
+    restaurantes = rcd.create_restaurantes_df(nombres, rates, resenas, pricings, labels, descripciones, direcciones, urls, img, phone_numbers)
     
     db_path = f'sqlite:///../../../ih_final_project_DB/ih_final_project'
     

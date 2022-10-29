@@ -77,6 +77,7 @@ def cards_travel(driver, cards):
     detalles = []
     labels = []
     descripciones = []
+    img = []
     urls = [i.get_attribute('href') for i in cards]
 
     for i in range(len(cards)):
@@ -125,8 +126,14 @@ def cards_travel(driver, cards):
             descripciones.append(descripcion)
         except:
             descripciones.append('')
+        
+        try:                                       
+            image = driver.find_element(By.XPATH,'/html/body/div[3]/div[9]/div[9]/div/div/div[1]/div[3]/div/div[1]/div/div/div[2]/div[1]/div[1]/button/img' ).get_attribute("src")
+            img.append(image)
+        except:
+            img.append('')
     
-    return nombres, rates, nums_resenas, detalles, pricings, labels, descripciones, urls
+    return nombres, rates, nums_resenas, detalles, pricings, labels, descripciones, urls, img
 
 
 def finish_driver(driver):

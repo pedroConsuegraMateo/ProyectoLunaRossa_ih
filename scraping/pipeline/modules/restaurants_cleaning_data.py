@@ -50,7 +50,7 @@ def coordsExtractor(urls):
     y = [re.search('!4d-?\d\d?\.\d{0,8}', i).group()[3:] for i in urls]
     return x, y
 
-def create_restaurantes_df(nombres, rates, nums_resenas, pricings, labels, descripciones, direcciones, urls, phone_numbers_df):
+def create_restaurantes_df(nombres, rates, nums_resenas, pricings, labels, descripciones, direcciones, urls, img, phone_numbers_df):
     
     x, y = coordsExtractor(urls)
     
@@ -63,6 +63,7 @@ def create_restaurantes_df(nombres, rates, nums_resenas, pricings, labels, descr
         'descripcion': descripciones,
         'direccion':direcciones,
         'url': urls,
+        'img': img,
         'x': x,
         'y': y
     }

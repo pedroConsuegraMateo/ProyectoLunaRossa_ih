@@ -74,3 +74,14 @@ CREATE TABLE activity_tracking(
 	FOREIGN KEY (id_usuario) REFERENCES usuarios (id),
 	FOREIGN KEY (id_evento) REFERENCES eventos (id)
 );
+
+CREATE TABLE restaurantes_visitados(
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	rate INTEGER,
+	guardado BOOLEAN,
+	id_usuario INTEGER,
+	id_restaurante,
+
+	FOREIGN KEY (id_usuario) REFERENCES usuarios (id),
+	FOREIGN KEY (id_restaurante) REFERENCES restaurantes (id)
+);
