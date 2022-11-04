@@ -4,11 +4,13 @@ from flask import request
 from tools import db_manager
 from tools import df_manager
 import pandas as pd
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 
-
+# ES COMÚN A TODOS LOS USUARIOS. SOLO NECESITA UBICACIÓN
 @app.route('/app/v1/restaurantes', methods=['GET'])
 def getRestaurantesCercanos():
     db_connection = db_manager.Db_manager()
@@ -25,12 +27,15 @@ def getRestaurantesCercanos():
     response = nearby_rest.to_json(orient='records')
     return response
 
+
+# ES COMÚN A TODOS LOS USUARIOS. SOLO NECESITA UBICACIÓN
 @app.route('/app/v1/restaurantes/top', methods=['GET'])
 def getTopRestaurantesPopulares():
 
     db_connection = db_manager.Db_manager()
-    x = float(request.args.get('x', '40.4156071'))
-    y = float(request.args.get('y', '-3.6927362'))
+    x = float(request.args.get('x'))
+    y = float(request.args.get('y'))
+    print('-----------------------------------: ', x)
     
     query = f'SELECT * FROM restaurantes'
     rest = db_connection.getRestaurantesByQuery(query)
@@ -38,10 +43,13 @@ def getTopRestaurantesPopulares():
     rest = df_manager.df_with_distances(rest, x, y)
     
     nearby_rest = df_manager.nearby_places(rest)
+    
     top = df_manager.top_restaurants(nearby_rest)
     response = top.to_json(orient='records')
     return response
 
+
+# ES COMÚN A TODOS LOS USUARIOS. SOLO NECESITA UBICACIÓN
 @app.route('/app/v1/restaurantes/exp', methods=['GET'])
 def getTopRestaurantesCaros():
 
@@ -60,6 +68,8 @@ def getTopRestaurantesCaros():
 
     return response
 
+
+# ES COMÚN A TODOS LOS USUARIOS. SOLO NECESITA UBICACIÓN
 @app.route('/app/v1/restaurantes/cheap', methods=['GET'])
 def getTopRestaurantesBaratos():
 
@@ -77,13 +87,15 @@ def getTopRestaurantesBaratos():
     response = top.to_json(orient='records')
     return response
 
+
+# NECESITA DATOS USUARIO
 @app.route('/app/v1/saved', methods=['GET', 'POST', 'DELETE'])
 def restaurantesGuardados():
     
     db_connection = db_manager.Db_manager()
     id = float(request.args.get('id', '1'))
     
-    if(request.method == 'POST'):
+    if request.method == 'POST':
 
         place_raw = request.json
         place = pd.DataFrame(place_raw)
@@ -91,25 +103,34 @@ def restaurantesGuardados():
         
         return 'guardado'
     
-    if(request.method == 'DELETE'):
+    if request.method == 'DELETE':
         # Lógica de eliminar lugar guardado
-        place_raw = request.json
-        place = pd.DataFrame(place_raw)
+        db_connection.deleteLugar(id, 'restaurantes_visitados')
         
         return 'eliminado'
     
     saved = db_connection.getRestaurantesGuardados(id)
-    response = saved.to_json(orient='records')
-    print(type(saved))
+    response = saved.head(10).to_json(orient='records')
+    
     return response
 
-@app.route('/app/v1/saved', methods=['POST', 'DELETE'])
-def usuarioManager():
+@app.route('/app/v1/recomendaciones', methods=['GET'])
+def restaurantesRecomendados():
     
     db_connection = db_manager.Db_manager()
-    if(request.method == 'POST'):
-        pass
-        
+    id = float(request.args.get('id', '1'))
+    
+    query = '''
+                SELECT r.id, r.nombre, r.rate, r.resenas, r.precio, r.labels, r.descripcion, r.direccion, r.url, r.numero, r.img, rv.rate as 'puntuacion', rv.id_usuario  
+                FROM restaurantes r
+                INNER JOIN restaurantes_visitados rv ON r.id = rv.id_restaurante
+            '''
+    restaurantes = db_connection.getRestaurantesByQuery(query)
+    
+    recomendaciones = df_manager.getRecomendaciones(restaurantes, id)
+    response = recomendaciones.to_json(orient='records')
+    
+    return response
 
 app.run(port=3030, debug=True)
 

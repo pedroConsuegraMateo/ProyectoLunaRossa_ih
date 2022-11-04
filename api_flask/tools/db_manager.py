@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 import pandas as pd
 
 
-@singleton
+
 class Db_manager():
     
     def __init__(self) -> None:
@@ -17,7 +17,7 @@ class Db_manager():
     def getRestaurantesByQuery(self, query):
         connection = self.connection
         result = pd.read_sql(query, connection)
-        return result
+        return result.drop_duplicates(subset=['direccion'])
     
     def getRestaurantesGuardados(self, id_usuario):
         connection = self.connection
@@ -28,7 +28,7 @@ class Db_manager():
                     WHERE id_usuario = {id_usuario}
                 '''
         result = pd.read_sql(query, connection)
-        return result
+        return result.drop_duplicates(subset=['direccion'])
     
     def postLugar(self, data, table_name, if_exists):
         try:
@@ -36,6 +36,17 @@ class Db_manager():
             return True
         except:
             return False
+        
+    def deleteLugar(self, id, table_name):
+        connection = self.connection
+        query = f'''
+                DELETE FROM {table_name} WHERE id_usuario={id}
+                '''
+        try:
+            pd.read_sql(query, connection)
+            return 'Eliminado'
+        except:
+            return 'Hubo un problema al borrar el registro.'
         
         
         
