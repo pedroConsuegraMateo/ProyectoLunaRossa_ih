@@ -43,3 +43,13 @@ export const getRestaurantesGuardados = async (id) => {
     return data
             
   }
+
+
+  export const getRestaurantesByLabel = async (label) => {
+
+    const url = `http://127.0.0.1:3030/app/v1/restaurantes-tipo?label=${label}`
+    const resp = await fetch(url)
+    const data = await resp.json()
+
+    return data
+  }

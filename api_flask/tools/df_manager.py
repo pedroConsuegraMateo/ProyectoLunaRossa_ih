@@ -8,13 +8,14 @@ def df_with_distances(df, x, y):
     lambda row: math.sqrt((x-float(row.x))**2+(y-float(row.y))**2), axis=1)
     return df
 
-def nearby_places(df, l=25):
-    return df.sort_values('distances', ascending=True).reset_index().head(l)
+def nearby_places(df, l=12):
+
+    return df.sort_values('distances', ascending=True).reset_index().head(8)
 
 def top_restaurants(df):
     df['resenas'] = df['resenas'].astype('int')
     df['rate'] = df['rate'].apply(lambda x: x.replace(',', '.')).astype('float64')
-    return df.sort_values(by=['resenas', 'rate'], ascending=False).reset_index().head(5)
+    return df.sort_values(by=['resenas', 'rate'], ascending=False).reset_index().head(8)
 
 def getRecomendaciones(df, id_usuario):
     restVSuser = pd.pivot_table(df, values='puntuacion', index='id', columns=['id_usuario'])
@@ -32,9 +33,9 @@ def getRecomendaciones(df, id_usuario):
     restVSuser['weights'] = restVSuser.sum(axis=1)
     restVSuser = restVSuser.sort_values('weights', ascending=False)
     
-    top10 = restVSuser[['weights']].head(10)
+    top8 = restVSuser[['weights']].head(8)
     
-    recomendaciones = df[df['id'].isin(top10.index)].drop(columns=['puntuacion', 'id_usuario']).drop_duplicates()
+    recomendaciones = df[df['id'].isin(top8.index)].drop(columns=['puntuacion', 'id_usuario']).drop_duplicates()
 
     
     return recomendaciones

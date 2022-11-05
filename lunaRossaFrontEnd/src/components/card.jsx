@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -17,6 +17,7 @@ export const RestCard = ({
   url,
   numero,
 }) => {
+
   return (
     <Grid item xs={3} alignItems='center'>
       <Card sx={{ maxWidth: 345, m: 3 }}>
@@ -30,7 +31,7 @@ export const RestCard = ({
             {nombre}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {descripcion}
+            {descripcion ? descripcion : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, ab!'}
           </Typography>
           <Typography variant="caption" color="text.secondary" gutterBottom>
             {direccion}

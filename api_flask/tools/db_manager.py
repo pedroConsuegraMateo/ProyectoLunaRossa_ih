@@ -28,7 +28,69 @@ class Db_manager():
                     WHERE id_usuario = {id_usuario}
                 '''
         result = pd.read_sql(query, connection)
+        return result.drop_duplicates(subset=['direccion']).head(8)
+    
+    def getRestaurantesByLabel(self, label):
+        connection = self.connection
+        
+        if label == 'italiana':
+            query = '''
+                        SELECT * FROM restaurantes r 
+                        WHERE r.labels LIKE "%italia%" 
+                        OR r.labels LIKE "%pizz%"
+                    '''
+            pass
+        elif label == 'latina':
+            query = '''
+                        SELECT * FROM restaurantes r 
+                        WHERE r.labels LIKE "%latin%" 
+                        OR r.labels LIKE "%colombi%" 
+                        OR r.labels LIKE "%ecuatoria%" 
+                        OR r.labels LIKE "%caribe%"
+                        OR r.labels LIKE "%argenti%" 
+                        OR r.labels LIKE "%venez%"
+                        OR r.labels LIKE "%meji%" 
+                        OR r.labels LIKE "%mexi%" 
+                    '''
+            pass
+        elif label == 'espanola':
+            query = '''
+                        SELECT * FROM restaurantes r 
+                        WHERE r.labels LIKE "%castella%" 
+                        OR r.labels LIKE "%españ%" 
+                        OR r.labels LIKE "%mediterra%" 
+                        OR r.labels LIKE "%galleg%"
+                        OR r.labels LIKE "%asturia%" 
+                        OR r.labels LIKE "%andalu%"
+                    '''
+            pass
+        elif label == 'asiatica':
+            query = '''
+                        SELECT * FROM restaurantes r 
+                        WHERE r.labels LIKE "%chino%" 
+                        OR r.labels LIKE "%japo%" 
+                        OR r.labels LIKE "%sushi%" 
+                        OR r.labels LIKE "%corea%"
+                        OR r.labels LIKE "%asia%" 
+                        OR r.labels LIKE "%canton%"
+                        OR r.labels LIKE "%mandarin%"
+                    '''
+            pass
+        elif label == 'tomar-algo':
+            query = '''
+                        SELECT * FROM restaurantes r 
+                        WHERE r.labels LIKE "%bar%" 
+                        OR r.labels LIKE "%tapas%" 
+                        OR r.labels LIKE "%copas%" 
+                        OR r.labels LIKE "%pub%"
+                    '''
+        else:
+            query = 'SELECT * FROM restaurantes'
+
+        
+        result = pd.read_sql(query, connection).head(8)
         return result.drop_duplicates(subset=['direccion'])
+        
     
     def postLugar(self, data, table_name, if_exists):
         try:
