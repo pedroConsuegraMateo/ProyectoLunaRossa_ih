@@ -114,7 +114,7 @@ def cards_travel(driver, cards):
             detalle = driver.find_elements(By.CLASS_NAME, 'rogA2c')
             detalles.append([i.text for i in detalle])
         except:
-            detalles.append('')
+            detalles.append([''])
 
         try:
             label = driver.find_element(By.CLASS_NAME,'u6ijk').text

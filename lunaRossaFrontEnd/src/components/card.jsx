@@ -17,11 +17,19 @@ export const RestCard = ({
   url,
   numero,
 }) => {
-
   return (
-    <Grid item xs={3} alignItems='center'>
+    <Grid item xs={3} alignItems="center">
       <Card sx={{ maxWidth: 345, m: 3 }}>
-        <CardMedia component="img" height="140" image={imagen ? imagen : 'https://cdn.dribbble.com/users/143350/screenshots/14052412/media/27ab3785352e64f357bc1608bae74361.png?compress=1&resize=400x300'} alt={nombre} />
+        <CardMedia
+          component="img"
+          height="140"
+          image={
+            imagen
+              ? imagen
+              : "https://cdn.dribbble.com/users/143350/screenshots/14052412/media/27ab3785352e64f357bc1608bae74361.png?compress=1&resize=400x300"
+          }
+          alt={nombre}
+        />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div"></Typography>
           <Typography variant="caption" color="text.secondary">
@@ -31,18 +39,22 @@ export const RestCard = ({
             {nombre}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            {descripcion ? descripcion : 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, ab!'}
+            {descripcion
+              ? descripcion
+              : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi, ab!"}
           </Typography>
           <Typography variant="caption" color="text.secondary" gutterBottom>
             {direccion}
           </Typography>
-          <Typography variant="caption" color="text.secondary" sx={{ml:1}}>
+          <Typography variant="caption" color="text.secondary" sx={{ ml: 1 }}>
             {numero}
           </Typography>
         </CardContent>
         <CardActions>
           <Button variant="contained" size="small">
-          <Link sx={{color: '#fff'}} href={url}>Ver en Google Maps</Link>
+            <Link sx={{ color: "#fff" }} href={url}>
+              Ver en Google Maps
+            </Link>
           </Button>
         </CardActions>
       </Card>

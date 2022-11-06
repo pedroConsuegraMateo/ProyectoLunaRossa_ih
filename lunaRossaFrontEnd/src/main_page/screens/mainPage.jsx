@@ -19,7 +19,6 @@ export const MainPage = () => {
 
   return (
     <MainPageLayout>
-      {/* Aquí vendrá el feed principal con las cards de restaurantes cerca de ti  */}
       <AllCards id_={usuario.id} />
     </MainPageLayout>
   );

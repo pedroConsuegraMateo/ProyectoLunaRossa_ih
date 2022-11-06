@@ -9,8 +9,8 @@ def df_with_distances(df, x, y):
     return df
 
 def nearby_places(df, l=12):
-
-    return df.sort_values('distances', ascending=True).reset_index().head(8)
+    response = df.sort_values('distances', ascending=True).reset_index().head(9)
+    return response
 
 def top_restaurants(df):
     df['resenas'] = df['resenas'].astype('int')

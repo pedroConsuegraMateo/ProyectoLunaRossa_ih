@@ -88,7 +88,7 @@ class Db_manager():
             query = 'SELECT * FROM restaurantes'
 
         
-        result = pd.read_sql(query, connection).head(8)
+        result = pd.read_sql(query, connection).head(9)
         return result.drop_duplicates(subset=['direccion'])
         
     

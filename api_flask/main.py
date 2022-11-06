@@ -15,7 +15,7 @@ def getRestaurantesByLabel():
     label = request.args.get('label')
     
     restaurantesByLabel = db_connection.getRestaurantesByLabel(label)
-    
+
     response = restaurantesByLabel.to_json(orient='records')
     
     return response
@@ -83,6 +83,20 @@ def restaurantesRecomendados():
     response = recomendaciones.to_json(orient='records')
     
     return response
+
+@app.route('/app/v1/todos')
+def getAllRestaurantes():
+    
+    db_connection = db_manager.Db_manager()
+    
+    query = 'SELECT * FROM restaurantes'
+    
+    restaurantes = db_connection.getRestaurantesByQuery(query)
+    response = restaurantes.to_json(orient='records')
+    
+    return response
+    
+    
 
 app.run(port=3030, debug=True)
 
