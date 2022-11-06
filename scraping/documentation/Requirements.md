@@ -1,0 +1,1 @@
+# Requirements For LunaRossa Data Scraper
