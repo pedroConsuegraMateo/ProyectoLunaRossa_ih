@@ -25,10 +25,13 @@ def pricing_cleaning(pricings):
     return cleaned_list
 
 def get_direcciones(detalles):
-    try:
-        direcciones = [i[0] for i in detalles]
-    except:
-        direcciones = ['' for i in range(len(detalles))]
+    direcciones = []
+    for i in detalles:
+        try:
+            direcciones.append(i[0])
+        except:
+            direcciones.append('')
+                
     return direcciones
 
 def phone_numbers(detalles):
