@@ -28,7 +28,7 @@ class Db_manager():
                     WHERE id_usuario = {id_usuario}
                 '''
         result = pd.read_sql(query, connection)
-        return result.drop_duplicates(subset=['direccion']).head(8)
+        return result.drop_duplicates(subset=['direccion']).head(4)
     
     def getRestaurantesByLabel(self, label):
         connection = self.connection
@@ -88,8 +88,8 @@ class Db_manager():
             query = 'SELECT * FROM restaurantes'
 
         
-        result = pd.read_sql(query, connection).head(9)
-        return result.drop_duplicates(subset=['direccion'])
+        result = pd.read_sql(query, connection)
+        return result.drop_duplicates(subset=['direccion']).sample(n=4)
         
     
     def postLugar(self, data, table_name, if_exists):

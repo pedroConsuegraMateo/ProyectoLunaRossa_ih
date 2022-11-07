@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import {
   getRestaurantesRecomendados,
   getRestaurantesGuardados,
-  getRestaurantesCercanos,
-  getUserLocation,
 } from "../data/getRestaurantes";
 import { RestCard } from "./card";
 import CardsByLabel from "./cardsByLabel";
@@ -22,7 +20,6 @@ export const AllCards = (props) => {
     getRestaurantesGuardados(id).then((data) => setRestaurantesGuardados(data));
   }, []);
 
-
   useEffect(() => {
     const timer = setInterval(() => {}, 1500);
     return clearInterval(timer);
@@ -31,12 +28,11 @@ export const AllCards = (props) => {
   return (
     <Grid container sx={{ p: 4, m: 4 }}>
       <CardsByLabel />
-      
+
       <Grid item xs={12}>
         <h2>Recomendaciones para ti</h2>
       </Grid>
-      {restaurantes.map(
-        (restaurante) => (
+      {restaurantes.map((restaurante) => (
           <RestCard
             nombre={restaurante.nombre}
             direccion={restaurante.direccion}
@@ -45,24 +41,24 @@ export const AllCards = (props) => {
             labels={restaurante.labels}
             url={restaurante.url}
             numero={restaurante.numero}
+            key={restaurante.id}
           />
-        ),
-        1000
-      )}
+        ))}
       <Grid item xs={12}>
         <h2>Restaurantes Guardados</h2>
       </Grid>
       {restaurantesGuardados.map((restaurante) => (
-        <RestCard
-          nombre={restaurante.nombre}
-          direccion={restaurante.direccion}
-          descripcion={restaurante.descripcion}
-          imagen={restaurante.img}
-          labels={restaurante.labels}
-          url={restaurante.url}
-          numero={restaurante.numero}
-        />
-      ))}
+          <RestCard
+            nombre={restaurante.nombre}
+            direccion={restaurante.direccion}
+            descripcion={restaurante.descripcion}
+            imagen={restaurante.img}
+            labels={restaurante.labels}
+            url={restaurante.url}
+            numero={restaurante.numero}
+            key={restaurante.id}
+          />
+        ))}
     </Grid>
   );
 };
