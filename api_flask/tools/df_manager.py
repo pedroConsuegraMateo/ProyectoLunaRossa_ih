@@ -40,7 +40,10 @@ def getRecomendaciones(df, id_usuario):
     return recomendaciones
 
 def transformRateAndResenas(df):
+    df['resenas'][df['resenas'].isin([''])] = df['resenas'][df['resenas'].isin([''])].apply(lambda x : x.replace('', '0'))
     df['resenas'] = df['resenas'].astype('int')
-    df['rate'] = df['rate'].apply(lambda x: x.replace(',', '.')).astype('float64')
+    df['rate'][df['rate'].isin([''])] = df['rate'][df['rate'].isin([''])].apply(lambda x : x.replace('', '2.5'))
+    df['rate'] = df['rate'].apply(lambda x: x.replace(',', '.')).astype('float64', errors='ignore')
+    
     
     return df

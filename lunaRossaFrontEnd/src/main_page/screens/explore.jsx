@@ -1,5 +1,5 @@
 import { Grid } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import { Chart } from "../../components/chart";
 import { MainPageLayout } from "../Layout/mainPageLayout";
 

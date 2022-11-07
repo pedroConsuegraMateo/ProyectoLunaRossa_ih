@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getAllRestaurantes } from "../data/getRestaurantes";
 
 export const Chart = () => {

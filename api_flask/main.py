@@ -91,7 +91,7 @@ def getAllRestaurantes():
     
     query = 'SELECT * FROM restaurantes'
     
-    restaurantes = db_connection.getRestaurantesByQuery(query)
+    df = db_connection.getRestaurantesByQuery(query)
     restaurantes = df_manager.transformRateAndResenas(df)
     response = restaurantes.to_json(orient='records')
     
