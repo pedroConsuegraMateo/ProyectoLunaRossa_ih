@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -7,6 +7,9 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Grid } from "@mui/material";
 import { Link } from "@mui/material";
+import FavoriteBorderRoundedIcon from '@mui/icons-material/FavoriteBorderRounded';
+import FavoriteRoundedIcon from '@mui/icons-material/FavoriteRounded';
+
 
 export const RestCard = ({
   nombre,
@@ -15,8 +18,10 @@ export const RestCard = ({
   imagen,
   labels,
   url,
-  numero,
+  numero
 }) => {
+
+  let saved = false
   return (
     <Grid item xs={3} alignItems="center">
       <Card sx={{ maxWidth: 345, m: 3 }}>
@@ -25,10 +30,9 @@ export const RestCard = ({
           height="140"
           image={
             imagen
-              ? imagen
-              : "https://cdn.dribbble.com/users/143350/screenshots/14052412/media/27ab3785352e64f357bc1608bae74361.png?compress=1&resize=400x300"
           }
           alt={nombre}
+          id={imagen}
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div"></Typography>
@@ -55,6 +59,9 @@ export const RestCard = ({
             <Link sx={{ color: "#fff" }} href={url}>
               Ver en Google Maps
             </Link>
+          </Button>
+          <Button onClick={() => {return !saved}}>
+              {saved ? <FavoriteRoundedIcon /> : <FavoriteBorderRoundedIcon />}
           </Button>
         </CardActions>
       </Card>

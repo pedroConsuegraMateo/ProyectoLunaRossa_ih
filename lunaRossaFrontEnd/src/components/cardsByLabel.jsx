@@ -114,6 +114,7 @@ export default function CardsByLabel() {
             labels={restaurante.labels}
             url={restaurante.url}
             numero={restaurante.numero}
+            key={restaurante.id}
           />
         ))}
       {value == "espanola" && (
@@ -131,6 +132,7 @@ export default function CardsByLabel() {
             labels={restaurante.labels}
             url={restaurante.url}
             numero={restaurante.numero}
+            key={restaurante.id}
           />
         ))}
 
@@ -149,6 +151,7 @@ export default function CardsByLabel() {
             labels={restaurante.labels}
             url={restaurante.url}
             numero={restaurante.numero}
+            key={restaurante.id}
           />
         ))}
 
@@ -168,6 +171,7 @@ export default function CardsByLabel() {
             labels={restaurante.labels}
             url={restaurante.url}
             numero={restaurante.numero}
+            key={restaurante.id}
           />
         ))}
 
@@ -186,6 +190,7 @@ export default function CardsByLabel() {
             labels={restaurante.labels}
             url={restaurante.url}
             numero={restaurante.numero}
+            key={restaurante.id}
           />
         ))}
 
@@ -204,6 +209,7 @@ export default function CardsByLabel() {
             labels={restaurante.labels}
             url={restaurante.url}
             numero={restaurante.numero}
+            key={restaurante.id}
           />
         ))}
     </Grid>
