@@ -14,9 +14,17 @@ import {
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import SettingsIcon from "@mui/icons-material/Settings";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export const SideBar = ({ drawerWidth = 240 }) => {
+  const [usuario, setUsuario] = useState(
+    window.localStorage.getItem("userAppLog")
+  );
+  const [nombre, setNombre] = useState('')
+  useEffect(() => {
+    console.log(usuario);
+    setNombre(usuario.nombre)
+  }, [usuario])
 
   return (
     <Box
@@ -33,7 +41,7 @@ export const SideBar = ({ drawerWidth = 240 }) => {
       >
         <Toolbar>
           <Typography variant="h6" noWrap component="div">
-            Nombre de Usuario
+            Hola, Pedro
           </Typography>
         </Toolbar>
         <Divider />
