@@ -11,7 +11,7 @@ export const Explore = () => {
           <h1>Charts</h1>
         </Grid>
         <Grid item xs={12}>
-          <h2>Restaurantes Scrapeados: <RestaurantesTotales /></h2>
+          <h2>Restaurantes Disponibles: <RestaurantesTotales /></h2>
         </Grid>
         <Grid item xs={6}>
           <ScatterChart />
