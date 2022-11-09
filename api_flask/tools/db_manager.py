@@ -50,7 +50,7 @@ class Db_manager():
                         OR r.labels LIKE "%argenti%" 
                         OR r.labels LIKE "%venez%"
                         OR r.labels LIKE "%meji%" 
-                        OR r.labels LIKE "%mexi%" 
+                        OR r.labels LIKE "%mex%" 
                     '''
             pass
         elif label == 'espanola':

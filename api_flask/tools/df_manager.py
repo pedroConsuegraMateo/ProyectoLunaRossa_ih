@@ -33,9 +33,9 @@ def getRecomendaciones(df, id_usuario):
     restVSuser['weights'] = restVSuser.sum(axis=1)
     restVSuser = restVSuser.sort_values('weights', ascending=False)
     
-    top8 = restVSuser[['weights']].head(4)
+    top4 = restVSuser[['weights']].head(4)
     
-    recomendaciones = df[df['id'].isin(top8.index)].drop(columns=['puntuacion', 'id_usuario']).drop_duplicates()
+    recomendaciones = df[df['id'].isin(top4.index)].drop(columns=['puntuacion', 'id_usuario']).drop_duplicates()
     
     return recomendaciones
 

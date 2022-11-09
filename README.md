@@ -120,6 +120,8 @@ El frontend es una web app en la que el usuario puede ver los diferentes restaur
 
 Todas las partes de la aplicación se han construido desde el principio con una idea: seguir trabajando en esto. Queda mejorar el método de extracción de datos, nuevas funcionalidades en la api, mejorar el diseño ui y hacerlo responsive en móvil y accesible para cualquier persona. Hacer testing tanto en python en la api como en el frontend con React. Limpiar el código y refactorizar. Etcétera.
 
+![meme python js](/lunaRossaFrontEnd/src/assets/meme-2.png)
+
 ### Status
 version: alpha
 
